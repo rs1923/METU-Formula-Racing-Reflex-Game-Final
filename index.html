@@ -925,11 +925,9 @@
     function exportCSV() {
       const list = getScores();
       if (!list.length) { alert("Henüz tur süresi yok!"); return; }
-      let csv = "Sıra,Sürücü İsmi,Reaksiyon (ms),Saat
-";
-      list.forEach((item, i) => { csv += `${i + 1},"${item.pilotName}",${item.reactionMs},"${item.timestamp}"
-`; });
-      const blob = new Blob(["﻿" + csv], { type: 'text/csv;charset=utf-8;' });
+      let csv = "Sıra,Sürücü İsmi,Reaksiyon (ms),Saat\n";
+      list.forEach((item, i) => { csv += `${i + 1},"${item.pilotName}",${item.reactionMs},"${item.timestamp}"\n`; });
+      const blob = new Blob(["\uFEFF" + csv], { type: 'text/csv;charset=utf-8;' });
       const url = URL.createObjectURL(blob);
       const link = document.createElement('a'); link.href = url;
       link.setAttribute('download', `METU_Racing_Sonuclar_${new Date().toISOString().slice(0,10)}.csv`);
